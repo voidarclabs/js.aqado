@@ -20,11 +20,15 @@ const server = app.listen(9000, () => {
 const io = socketio(server);
 
 const functions = {
-  test: { func: test },
+  // test: { func: test },
 };
 
 io.on("connection", (socket) => {
   console.log(socket.id);
+  socket.on("handshake", () => {
+    socket.emit("beginGameLoop");
+    console.log("something happened");
+  });
   socket.on("clientUpdate", (data) => {
     if (functions[data[0]]) {
       functions[data[0]].func(data[1]);
