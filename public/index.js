@@ -4,7 +4,7 @@ const functions = {};
 
 socket.emit("handshake");
 
-socket.on("startGameLoop", () => {
+socket.on("beginGameLoop", () => {
   drawScreen();
   socket.on("serverUpdate", (data) => {
     if (functions[data[0]]) {
