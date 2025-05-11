@@ -12,8 +12,8 @@ app.get("/", (req, res) => {
 app.use(express.static("public"));
 
 // Start the server
-const server = app.listen(9000, () => {
-  console.log("Server listening on port 9000");
+const server = app.listen(4000, () => {
+  console.log("Server listening on port 4000");
 });
 
 // declare websocket server

@@ -1,0 +1,67 @@
+body {
+	background-color: black;		
+	padding: 0;
+	margin: 0;
+	color: white;
+	font-family: Consolas;
+	display: flex;
+}
+
+#mainContainer {
+	margin-top: 20px;
+}
+
+#tokenContainer {
+	position: absolute;
+	display: flex;
+	padding-top: 20px;
+}
+
+.space {
+	height: 50px;
+	margin: 5px 25vw;
+	width: 50vw;
+	border-color: lime;
+	border-width: 3px;
+	border-style: solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 2em;
+}
+
+.space#safe {
+	border-color: yellow;
+	background-color: darkgoldenrod;
+}
+
+.token {
+	height: 40px;
+	border-color: lime;
+	margin: 10px 0;
+	border-width: 3px;
+	aspect-ratio: 1;
+	border-style: solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+.token#token0 {
+	margin-left: 30vw;
+}
+
+.token#token1 {
+	margin-left: 5vw;
+}
+
+.token#token2 {
+	margin-left: calc(100vw - 70vw - 172px); 
+}
+
+.token#token3 {
+	margin-left: 5vw;
+}
+
+
