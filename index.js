@@ -63,20 +63,24 @@ function move(data, socket) {
       if (callback.token > 1) {
         console.log("not one of  ur tokens bozo");
       } else {
-        moveToken(callback.token, diceRoll);
+        moveToken(callback.token, diceRoll, currentPlayer);
         currentPlayer += 1;
       }
     } else {
       if (callback.token < 2) {
         console.log("not one of ur tokens bozo");
       } else {
-        moveToken(callback.token, diceRoll);
+        moveToken(callback.token, diceRoll, currentPlayer);
         currentPlayer = 0;
       }
     }
   });
 }
 
-function moveToken(token, move) {
-  console.log("moved ig");
+function moveToken(token, move, player) {
+  if (player == 0) {
+    if (move == 1) {
+      socket.emit("serverUpdate", ["tokenMove", [token, move]]);
+    }
+  }
 }
