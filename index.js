@@ -1,3 +1,4 @@
+const { on } = require("events");
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -23,15 +24,48 @@ const functions = {
   // test: { func: test },
 };
 
+var currentPlayer = 0;
+var token1 = 11;
+var token2 = 11;
+var token3 = 11;
+var token4 = 11;
+
 io.on("connection", (socket) => {
   console.log(socket.id);
   socket.on("handshake", () => {
     socket.emit("beginGameLoop");
-    console.log("something happened");
+    for (let i = 0; i < 4; i++) {
+      setSpace(socket, i, 11);
+    }
   });
+
   socket.on("clientUpdate", (data) => {
     if (functions[data[0]]) {
       functions[data[0]].func(data[1]);
     }
   });
 });
+
+function setSpace(socket, token, space) {
+  socket.emit("serverUpdate", ["setSpace", [token, space]]);
+}
+
+function dice() {
+  return Math.ceil(Math.random() * 4);
+}
+
+await function move(player) {
+  socket.emit("serverUpdate", ["currentPlayer", currentPlayer]);
+  let diceRoll = dice();
+  socket.emit("serverUpdate", [
+    "diceRoll",
+    [
+      diceRoll,
+      (callback) => {
+        console.log(callback.token);
+        if (currentPlayer == 0) {
+        }
+      },
+    ],
+  ]);
+};

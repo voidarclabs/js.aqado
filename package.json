@@ -1,13 +1,22 @@
 {
   "name": "node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Extensible with other functions. Basically i cba to set up websockets anymore",
+  "homepage": "https://github.com/voidarclabs/js.aqado#readme",
+  "bugs": {
+    "url": "https://github.com/voidarclabs/js.aqado/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voidarclabs/js.aqado.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "eslint-lsp": "^0.1.2",
     "express": "^4.21.2",
