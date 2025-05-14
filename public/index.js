@@ -2,18 +2,23 @@ const socket = io();
 
 const functions = {
   setSpace: { func: setTokenSpace },
-  diceRoll: { func: diceRoll },
 };
 
 socket.emit("handshake");
 
 socket.on("beginGameLoop", () => {
   drawScreen();
-  socket.on("serverUpdate", (data) => {
+  socket.on("serverUpdate", (data, callback) => {
     console.log("server update: ", data);
     if (functions[data[0]]) {
-      functions[data[0]].func(data[1]);
+      functions[data[0]].func(data[1], callback);
     }
+  });
+});
+
+socket.on("diceRoll", (data, callback) => {
+  callback({
+    token: prompt(`roll is ${data}`),
   });
 });
 
@@ -49,13 +54,6 @@ function setTokenSpace(data) {
   currentToken.style.marginTop = `${pxToMove + 10}px`;
 }
 
-function diceRoll(data) {
-  let diceRoll = data[0];
-  let callback = data[1];
-
-  let userSelection = prompt("which piece to move?");
-
-  callback({
-    token: userSelection,
-  });
+function triggerMove() {
+  socket.emit("clientUpdate", ["triggerMove"]);
 }

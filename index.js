@@ -21,7 +21,7 @@ const server = app.listen(4000, () => {
 const io = socketio(server);
 
 const functions = {
-  // test: { func: test },
+  triggerMove: { func: move },
 };
 
 var currentPlayer = 0;
@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 
   socket.on("clientUpdate", (data) => {
     if (functions[data[0]]) {
-      functions[data[0]].func(data[1]);
+      functions[data[0]].func(data[1], socket);
     }
   });
 });
@@ -54,18 +54,29 @@ function dice() {
   return Math.ceil(Math.random() * 4);
 }
 
-await function move(player) {
+function move(data, socket) {
   socket.emit("serverUpdate", ["currentPlayer", currentPlayer]);
   let diceRoll = dice();
-  socket.emit("serverUpdate", [
-    "diceRoll",
-    [
-      diceRoll,
-      (callback) => {
-        console.log(callback.token);
-        if (currentPlayer == 0) {
-        }
-      },
-    ],
-  ]);
-};
+  socket.emit("diceRoll", diceRoll, (callback) => {
+    console.log(currentPlayer);
+    if (currentPlayer == 0) {
+      if (callback.token > 1) {
+        console.log("not one of  ur tokens bozo");
+      } else {
+        moveToken(callback.token, diceRoll);
+        currentPlayer += 1;
+      }
+    } else {
+      if (callback.token < 2) {
+        console.log("not one of ur tokens bozo");
+      } else {
+        moveToken(callback.token, diceRoll);
+        currentPlayer = 0;
+      }
+    }
+  });
+}
+
+function moveToken(token, move) {
+  console.log("moved ig");
+}
