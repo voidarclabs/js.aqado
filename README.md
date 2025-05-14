@@ -1,3 +1,4 @@
-# Multiplayer Template
+# AQADo Project
 
-Extensible with other functions. Basically i cba to set up websockets anymore
+Some pair thing i'm not doing in a pair and supposed to be doing in python.
+For obvious reasons i'm not doing that (pygame is ass)
